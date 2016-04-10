@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Chokidar by vaibhavpandeyvpz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Chokidar</h1>
+      <h2 class="project-tagline">Doctrine powered, symfony/security inspired simpler authentication system for PHP 5.3+.</h2>
+      <a href="https://github.com/vaibhavpandeyvpz/chokidar" class="btn">View on GitHub</a>
+      <a href="https://github.com/vaibhavpandeyvpz/chokidar/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/vaibhavpandeyvpz/chokidar/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="vaibhavpandeyvpzchokidar" class="anchor" href="#vaibhavpandeyvpzchokidar" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>vaibhavpandeyvpz/chokidar</h1>
+
+<p>Doctrine powered, <a href="https://github.com/symfony/security">symfony/security</a> inspired, simpler authentication system for PHP 5.3+.</p>
+
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install</h2>
+
+<div class="highlight highlight-source-shell"><pre>composer require vaibhavpandeyvpz/chokidar
+
+<span class="pl-c"># If you would like to use Chokidar\Loader\DoctrineLoader, install doctrine/dbal</span>
+composer require doctrine/dbal</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$connection</span> <span class="pl-k">=</span> <span class="pl-c">/** instanceof Doctrine\DBAL\Connection */</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$loader</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Chokidar\Loader\</span><span class="pl-c1">DoctrineLoader</span>(<span class="pl-smi">$connection</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$guard</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Chokidar\Guard\</span><span class="pl-c1">SessionGuard</span>(<span class="pl-smi">$loader</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">/** @desc To login user with username + password */</span></span>
+<span class="pl-s1"><span class="pl-smi">$result</span> <span class="pl-k">=</span> <span class="pl-smi">$guard</span><span class="pl-k">-&gt;</span>login(<span class="pl-s"><span class="pl-pds">'</span>username<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>password<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"><span class="pl-k">switch</span> (<span class="pl-smi">$result</span>) {</span>
+<span class="pl-s1">    <span class="pl-k">case</span> <span class="pl-c1">Chokidar\</span><span class="pl-c1">GuardInterface</span><span class="pl-k">::</span><span class="pl-c1">RESULT_NOT_FOUND</span>:</span>
+<span class="pl-s1">        <span class="pl-c">// No user found with this username</span></span>
+<span class="pl-s1">        <span class="pl-k">break</span>;</span>
+<span class="pl-s1">    <span class="pl-k">case</span> <span class="pl-c1">Chokidar\</span><span class="pl-c1">GuardInterface</span><span class="pl-k">::</span><span class="pl-c1">RESULT_MISMATCH</span>:</span>
+<span class="pl-s1">        <span class="pl-c">// Password did not match with username</span></span>
+<span class="pl-s1">        <span class="pl-k">break</span>;</span>
+<span class="pl-s1">    <span class="pl-k">default</span>:</span>
+<span class="pl-s1">        <span class="pl-c">// User is now logged in</span></span>
+<span class="pl-s1">        <span class="pl-k">break</span>;</span>
+<span class="pl-s1">}</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">/** @desc To check if user is currently logged in */</span></span>
+<span class="pl-s1"><span class="pl-k">if</span> (<span class="pl-smi">$guard</span><span class="pl-k">-&gt;</span>check()) {</span>
+<span class="pl-s1">    <span class="pl-c">// Logged in</span></span>
+<span class="pl-s1">} <span class="pl-k">else</span> {</span>
+<span class="pl-s1">    <span class="pl-c">// Not logged in</span></span>
+<span class="pl-s1">}</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">/** @desc To logout currently logged in user */</span></span>
+<span class="pl-s1"><span class="pl-smi">$guard</span><span class="pl-k">-&gt;</span>logout();</span></pre></div>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>See <a href="https://github.com/vaibhavpandeyvpz/chokidar/blob/master/LICENSE.md">LICENSE.md</a> file.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/vaibhavpandeyvpz/chokidar">Chokidar</a> is maintained by <a href="https://github.com/vaibhavpandeyvpz">vaibhavpandeyvpz</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
