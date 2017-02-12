@@ -27,9 +27,9 @@ class SessionAuthenticator extends Authenticator
     protected $storage;
 
     /**
-     * @var UserInterface
+     * @var UserInterface|false
      */
-    protected $user;
+    protected $user = false;
 
     /**
      * SessionAuthenticator constructor.
@@ -86,5 +86,13 @@ class SessionAuthenticator extends Authenticator
     {
         unset($this->storage[self::STORAGE_KEY]);
         $this->user = false;
+    }
+
+    /**
+     * @return UserInterface|false
+     */
+    public function user()
+    {
+        return $this->user;
     }
 }
