@@ -1,0 +1,28 @@
+{
+  "authors": [{
+    "name": "Vaibhav Pandey",
+    "email": "contact@vaibhavpandey.com"
+  }],
+  "autoload": {
+    "psr-4": {
+      "Chokidar\\": "src/"
+    }
+  },
+  "description": "symfony/security inspired simpler authentication system for PHP 5.3+.",
+  "homepage": "http://vaibhavpandeyvpz.github.io/chokidar",
+  "keywords": ["authentication", "security", "session"],
+  "license": "MIT",
+  "name": "vaibhavpandeyvpz/chokidar",
+  "require": {
+    "php": "^5.3 || ^7.0"
+  },
+  "require-dev": {
+    "ircmaxell/password-compat": "^1.0",
+    "vaibhavpandeyvpz/databoss": "^1.0"
+  },
+  "suggest": {
+    "ircmaxell/password-compat": "",
+    "vaibhavpandeyvpz/databoss": ""
+  },
+  "type": "library"
+}
